@@ -1,0 +1,62 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Jasmine Spec Runner</title>
+
+    <link rel="shortcut icon" type="image/png" href="lib/jasmine-1.3.1/jasmine_favicon.png">
+    <link rel="stylesheet" type="text/css" href="lib/jasmine-1.3.1/jasmine.css">
+    <script type="text/javascript" src="lib/jasmine-1.3.1/jasmine.js"></script>
+    <script type="text/javascript" src="lib/jasmine-1.3.1/jasmine-html.js"></script>
+
+    <!-- include jasmine plugin here -->
+    <script type="text/javascript" src="lib/jquery.min.js"></script>
+    <script type="text/javascript" src="lib/jasmine-jquery.js"></script>
+    <script type="text/javascript" src="../lib/sea.js"></script>
+
+
+</head>
+
+<body>
+  
+  <div id="TDD-fixture"></div>
+
+  <script type="text/javascript">
+      
+        
+        seajs.config({
+          paths: {
+            'spec': '../jasmine/spec'
+          }
+        });
+        seajs.use('spec/cmd_spec.js');
+
+        (function() {
+      var jasmineEnv = jasmine.getEnv();
+      jasmineEnv.updateInterval = 1000;
+
+      var htmlReporter = new jasmine.HtmlReporter();
+
+      jasmineEnv.addReporter(htmlReporter);
+
+      jasmineEnv.specFilter = function(spec) {
+      return htmlReporter.specFilter(spec);
+      };
+
+      var currentWindowOnload = window.onload;
+
+      window.onload = function() {
+      if (currentWindowOnload) {
+      currentWindowOnload();
+      }
+      execJasmine();
+      };
+
+      function execJasmine() {
+      jasmineEnv.execute();
+      }
+
+      })();
+    </script>
+</body>
+</html>
