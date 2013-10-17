@@ -76,13 +76,14 @@ describe( ' learding some Matchers: toConatin, toBe, toBeChecked,toBeEmpty, toBe
          * _______________________________________________________________________________*/
         $('#TDD-fixture header').trigger('click');
         expect( $('#TDD-fixture p#kbinfo') ).toHaveClass('wowo');
+        // 输出有效~~~~
+        // 获取的是jquery对象```
+        console.log($('#TDD-fixture p#kbinfo').attr('class'));
         $('#TDD-fixture header').trigger('click');
         expect( $('#TDD-fixture p#kbinfo') ).toHaveClass('haha');
 
-        // 不能直接调用className等, 这也是jasmine-jquery为什么封装上述mathcer的原因~!
-        // expect( $('#TDD-fixture p#kbinfo').className ).toEqual('haha');
+
+        // 可以用.attr方法获取classname, 但是jasmine-jquery封装好了上述mathcer, 所以我们就不必再取class再去equal
+        expect( $('#TDD-fixture p#kbinfo').attr('class') ).toEqual('haha');
     });
-    // it('Matcher:  toContain', function(){
-        // expect( $('#TDD-fixture section.empty') ).toBeEmpty();
-    // });
 });
